@@ -10,7 +10,7 @@ export default function AnimeCard() {
     const [showLogin, setShowLogin] = useState(false)
     const [alert, setAlert] = useState("")
     const { id } = useParams(null)
-
+    const API_URL = import.meta.env.VITE_API_URL
     useEffect(() => {
         async function GetDetailAnime() {
             const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
@@ -28,19 +28,12 @@ export default function AnimeCard() {
 
     async function handleClick(status) {
         try {
-            const token = localStorage.getItem('token')
-            const response = await fetch("/api/v1/watchList", {
-                    method: "POST",
-                    headers: { 
-                        'Content-Type'  : 'application/json',
-                        'Authorization' : `Bearer ${token}`},
-                    body: JSON.stringify({
-                        animeId: detailAnime.mal_id,
-                        image_url: detailAnime.images.jpg.large_image_url,
-                        title: detailAnime.title,
-                        status: status
-                    })
-            })
+            const response = await api.post('/api/v1/watchList', {
+                    animeId: detailAnime.mal_id,
+                    image_url: detailAnime.images.jpg.large_image_url,
+                    title: detailAnime.title,
+                    status: status
+                })
             const result = await response.json()
             if (result.success == true) {
                 setAlert("add")

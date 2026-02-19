@@ -29,7 +29,7 @@ export default function MyList() {
 
             try {
                 setLoading(true)
-                const response = await api.get('/watchList')
+                const response = await api.get('/api/v1/watchList')
                 const result = response.data
 
                 if (result.success) {
@@ -48,7 +48,7 @@ export default function MyList() {
 
     async function handleUpdate(updateData) {
         try {
-            const response = await api.patch('/watchList', {
+            const response = await api.patch('/api/v1/watchList', {
                     animeId: selectedAnime.animeId,
                     ...updateData
             })
