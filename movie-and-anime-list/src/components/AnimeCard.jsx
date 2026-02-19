@@ -4,13 +4,13 @@ import { useParams } from "react-router";
 import AlertLogin from "../ui/Alert-Login";
 import AddAnimeAlert from "../ui/Alert-Add-Anime";
 import AlreadyInList from "../ui/Alert-AlreadyInList";
-import api from "../utils/api";
+
 export default function AnimeCard() {
     const [detailAnime, setDetailAnime] = useState(null)
     const [showLogin, setShowLogin] = useState(false)
     const [alert, setAlert] = useState("")
     const { id } = useParams(null)
-    const API_URL = import.meta.env.VITE_API_URL
+    const API_URL = import.meta.env.VITE_URL_API
     useEffect(() => {
         async function GetDetailAnime() {
             const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
@@ -28,13 +28,14 @@ export default function AnimeCard() {
 
     async function handleClick(status) {
         try {
+            const token = localStorage.getItem('token')
             const response = await api.post('/api/v1/watchList', {
-                    animeId: detailAnime.mal_id,
-                    image_url: detailAnime.images.jpg.large_image_url,
-                    title: detailAnime.title,
-                    status: status
-                })
-            const result = await response.json()
+            animeId: detailAnime.mal_id,
+            image_url: detailAnime.images.jpg.large_image_url,
+            title: detailAnime.title,
+            status: status
+        })
+            const result = response.data
             if (result.success == true) {
                 setAlert("add")
             } 
