@@ -1,26 +1,27 @@
-import { useEffect, useState } from "react";
-import Loading from "../ui/Loading";
-import { useParams } from "react-router";
-import AlertLogin from "../ui/Alert-Login";
-import AddAnimeAlert from "../ui/Alert-Add-Anime";
-import AlreadyInList from "../ui/Alert-AlreadyInList";
+import { useEffect, useState } from "react"
+import { useParams } from "react-router"
+import Loading from "../ui/Loading"
+import AlertLogin from "../ui/Alert-Login"
+import AddAnimeAlert from "../ui/Alert-Add-Anime"
+import AlreadyInList from "../ui/Alert-AlreadyInList"
+
+// PENTING: Sesuaikan path ini dengan lokasi file api.js lu!
+import api from "../utils/api"
 
 export default function AnimeCard() {
     const [detailAnime, setDetailAnime] = useState(null)
     const [showLogin, setShowLogin] = useState(false)
     const [alert, setAlert] = useState("")
     const { id } = useParams(null)
-    const API_URL = import.meta.env.VITE_URL_API
+
     useEffect(() => {
         async function GetDetailAnime() {
             const response = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`)
             const data = await response.json()
-
             setDetailAnime(data.data)
         }
         GetDetailAnime()
     }, [id])
-
 
     if (!detailAnime) {
         return <Loading/>
@@ -28,27 +29,26 @@ export default function AnimeCard() {
 
     async function handleClick(status) {
         try {
-            const token = localStorage.getItem('token')
             const response = await api.post('/api/v1/watchList', {
-            animeId: detailAnime.mal_id,
-            image_url: detailAnime.images.jpg.large_image_url,
-            title: detailAnime.title,
-            status: status
-        })
-            const result = response.data
-            if (result.success == true) {
+                animeId: detailAnime.mal_id,
+                image_url: detailAnime.images.jpg.large_image_url,
+                title: detailAnime.title,
+                status: status
+            })
+
+            if (response.data.success === true) {
                 setAlert("add")
             } 
-            if (result.status == 401 || result.errors == "Unauthorized") {
+        } catch (error) {
+            console.log("Error response:", error.response?.data)
+
+            if (error.response?.status === 401 || error.response?.data?.errors === "Unauthorized") {
                 setShowLogin(true)
-            }
-            if (result.errors == "Anime already in your list") {
+            } else if (error.response?.data?.errors === "Anime already in your list") {
                 setAlert("inList")
             } else {
-            console.log(result.errors)
+                console.error("Terjadi kesalahan:", error.message)
             }
-        } catch (error) {
-            console.log(error)
         }
     }
 
@@ -58,18 +58,20 @@ export default function AnimeCard() {
                 {showLogin && ( 
                     <AlertLogin/>
                 )}
-                {alert == "add" ? (
+                {alert === "add" ? (
                     <AddAnimeAlert 
-                    onClose={() => setAlert("")}
-                    title={detailAnime.title}
+                        onClose={() => setAlert("")}
+                        title={detailAnime.title}
                     />
-                ) : alert == "inList" ? (<AlreadyInList
-                    onClose={() => setAlert("")}
-                    title={detailAnime.title}
-                    />) : <></>} 
+                ) : alert === "inList" ? (
+                    <AlreadyInList
+                        onClose={() => setAlert("")}
+                        title={detailAnime.title}
+                    />
+                ) : <></>} 
+                
                 {/*Header*/}
                 <div className="flex gap-6 mb-8">
-                    
                     {/*Poster*/}
                     <img 
                         src={detailAnime.images.jpg.large_image_url} 
@@ -146,6 +148,7 @@ export default function AnimeCard() {
                         />
                     </div>
                 )}
+                
             <div className="bg-gray-800 p-6 rounded-lg mt-6">
                 <h2 className="text-2xl font-bold mb-4">Add to My List</h2>
 
