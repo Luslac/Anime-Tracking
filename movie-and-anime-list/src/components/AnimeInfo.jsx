@@ -54,8 +54,7 @@ export default function AnimeInfo() {
     if (error) {
         return (
             <div className="p-3 text-white text-center">
-                <p className="text-xl text-red-400">⚠️ Error: {error}</p>
-                <p className="text-sm text-gray-400 mt-2">API might be down. Try again later.</p>
+                <p className="text-xl text-red-400">⚠️ Error </p>
             </div>
         )
     }

@@ -45,7 +45,7 @@ export default function AnimeCard() {
             if (result.success == true) {
                 setAlert("add")
             } 
-            if (result.status == 401) {
+            if (result.status == 401 || result.errors == "Unauthorized") {
                 setShowLogin(true)
             }
             if (result.errors == "Anime already in your list") {
@@ -135,7 +135,7 @@ export default function AnimeCard() {
                     </div>
                 </div>
 
-                {/*Synopsis*/}
+                {/*Sinopsis*/}
                 <div className="bg-gray-800 p-6 rounded-lg mb-6">
                     <h2 className="text-2xl font-bold mb-4">Synopsis</h2>
                     <p className="text-gray-300 leading-relaxed">{detailAnime.synopsis}</p>
@@ -155,7 +155,7 @@ export default function AnimeCard() {
             <div className="bg-gray-800 p-6 rounded-lg mt-6">
                 <h2 className="text-2xl font-bold mb-4">Add to My List</h2>
 
-                {/*Add To List*/}
+                {/*Add To List*/} 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                     <button className="flex flex-col items-center gap-2 p-4 bg-green-600 hover:bg-green-700 rounded-lg transition active:scale-95 group"
                     onClick={() => handleClick("WATCHING")}>

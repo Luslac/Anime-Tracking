@@ -15,8 +15,8 @@ export default function MyList() {
 
     const getAuthData = () => {
         const token = localStorage.getItem("token")
-        return { token };
-    };
+        return { token }
+    }
 
     useEffect(() => {
         async function fetchList() {
@@ -28,22 +28,22 @@ export default function MyList() {
             }
 
             try {
-                setLoading(true);
+                setLoading(true)
                 const response = await api.get('/watchList')
                 const result = response.data
 
                 if (result.success) {
-                    setAnimeList(result.data);
+                    setAnimeList(result.data)
                 } else {
-                    setError(result.errors || "Failed to load list");
+                    setError(result.errors || "Failed to load list")
                 }
             } catch (err) {
-                setError("Failed to fetch anime list");
+                setError("Failed to fetch anime list")
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
         }
-        fetchList();
+        fetchList()
     }, [])
 
     async function handleUpdate(updateData) {
@@ -61,11 +61,11 @@ export default function MyList() {
                             ? { ...a, ...result.data }
                             : a
                     )
-                );
-                setSelectedAnime(null);
+                )
+                setSelectedAnime(null)
             }
         } catch (err) {
-            console.error("Update error:", err);
+            console.error("Update error:", err)
         }
     }
 
@@ -120,7 +120,7 @@ export default function MyList() {
 
                 {error ? (
                     <div className="text-center py-20">
-                        <p className="text-gray-400">⚠️ Error</p>
+                        <p className="text-gray-400">⚠️ {error}</p>
                     </div>
                 ) :loading ? (
                     <div className="text-center py-20 text-gray-400 text-xl">⏳ Loading...</div>
@@ -151,5 +151,5 @@ export default function MyList() {
                 />
             )}
         </div>
-    );
+    )
 }

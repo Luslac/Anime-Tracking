@@ -16,6 +16,7 @@ export default function UpdateUI({ anime, onClose, onUpdate, onDelete }) {
     return (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-[#1a2332] border border-gray-700 rounded-xl w-full max-w-lg shadow-2xl">
+
                 {/* Header */}
                 <div className="flex items-center gap-4 p-5 border-b border-gray-700">
                     <img src={anime.image_url} alt={anime.title} className="w-14 h-20 object-cover rounded-lg" />
@@ -30,7 +31,7 @@ export default function UpdateUI({ anime, onClose, onUpdate, onDelete }) {
 
                 {/* Body */}
                 <div className="p-5 space-y-5 max-h-[70vh] overflow-y-auto">
-                    {/* Status Selector */}
+                    {/* Status */}
                     <div>
                         <label className="block text-sm font-medium text-gray-400 mb-2">Status</label>
                         <div className="grid grid-cols-3 gap-2">
@@ -45,7 +46,7 @@ export default function UpdateUI({ anime, onClose, onUpdate, onDelete }) {
                             ))}
                         </div>
                     </div>
-                        {/* Your Rating */} 
+                        {/* Rating */} 
                         <div className="max-h-[70vh]">
                             <label className="block text-sm font-medium text-gray-400 mb-2">
                                 Your Rating
@@ -86,7 +87,7 @@ export default function UpdateUI({ anime, onClose, onUpdate, onDelete }) {
                         </div>
                     </div>
 
-                    {/* Favorite Toggle */}
+                    {/* Favorite */}
                     <div className="flex items-center justify-between">
                         <label className="text-sm font-medium text-gray-400">Mark as Favorite</label>
                         <button onClick={() => setIsFavorite(!isFavorite)} className={`text-2xl transition ${isFavorite ? "grayscale-0" : "grayscale opacity-40"}`}>❤️</button>

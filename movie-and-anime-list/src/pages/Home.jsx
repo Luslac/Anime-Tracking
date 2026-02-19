@@ -27,7 +27,6 @@ export default function Home() {
 
             <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
                 
-                {/* Top Anime Section */}
                 <section>
                     <div className="flex items-center justify-between mb-6">
                         <div>
@@ -35,7 +34,7 @@ export default function Home() {
                             <p className="text-gray-400 text-sm mt-1">Highest rated anime of all time</p>
                         </div>
                     </div>
-                    <TopAnime />
+                    <TopAnime /> 
                 </section>
 
                 <section>
@@ -47,6 +46,7 @@ export default function Home() {
                     </div>
                     <SeasonalAnime />
                 </section>
+                
                 <section>
                     <div className="flex items-center justify-between mb-6">
                         <div>
