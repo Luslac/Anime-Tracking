@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import AlertLogin from "../ui/Alert-Login";
 import AddAnimeAlert from "../ui/Alert-Add-Anime";
 import AlreadyInList from "../ui/Alert-AlreadyInList";
-
+import api from "../utils/api";
 export default function AnimeCard() {
     const [detailAnime, setDetailAnime] = useState(null)
     const [showLogin, setShowLogin] = useState(false)
