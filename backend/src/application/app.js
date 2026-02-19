@@ -22,6 +22,9 @@ web.use(cors({
         credentials: true
     }))
 web.use(express.json())
+web.get('/', (req, res) => {
+    res.status(200).send('OK')
+})
 web.use(publicRouter)
 web.use(userRouter)
 web.use(errorMiddleWare)
