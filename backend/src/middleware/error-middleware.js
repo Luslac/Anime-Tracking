@@ -10,6 +10,7 @@ const errorMiddleWare = async (err, req, res, next) => {
     if (err instanceof ResponseError) {
         res.status(err.status).json({
             errors: err.message,
+            status: err.status,
             success: false
         })
         
@@ -17,6 +18,7 @@ const errorMiddleWare = async (err, req, res, next) => {
         res.status(400).json({
             errors: "Validation Error",
             success: false,
+            status: 400,
             details: err.flatten().fieldErrors
         })
 
@@ -29,6 +31,7 @@ const errorMiddleWare = async (err, req, res, next) => {
 
         res.status(500).json({
             errors: "Internal Server Error",
+            status: 500,
             success: false
         })
     }

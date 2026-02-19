@@ -46,12 +46,9 @@ const getAnimeList = async (userId, filters = {}) => {
 }
 
 const updateAnimeData = async (data, userId) => {
+    const { animeId, score, status, rating, episodesWatched, notes, isFavorite } = data
 
-    const { animeId, score, status, rating, episodesWatched, notes, isFavorite } = data;
-
-    const existing = await animeListRepo.find(
-        { userId: userId, animeId: animeId }
-    )
+    const existing = await animeListRepo.find({ userId, animeId })
 
     if (!existing) {
         throw new ResponseError(404, 'Anime not found in your list')
@@ -61,46 +58,41 @@ const updateAnimeData = async (data, userId) => {
 
     if (status) {
         dataToUpdate.status = status
+        const now = new Date()
+        
         if (status === 'WATCHING' && !existing.startedAt) {
-            dataToUpdate.startedAt = new Date()
+            dataToUpdate.startedAt = now
         }
         if (status === 'COMPLETED') {
-            dataToUpdate.completedAt = new Date()
+            dataToUpdate.completedAt = now
+            if (!existing.startedAt) dataToUpdate.startedAt = now
         }
     }
 
-    if (rating !== undefined) {
-        if (rating < 1 || rating > 10) {
-            throw new ResponseError(400, 'Rating must be between 1-10')
+
+    const validateRange = (value, name) => {
+        if (value !== undefined) {
+            if (value < 0 || value > 10) { 
+                throw new ResponseError(400, `${name} must be between 0-10`)
+            }
+            return value
         }
-        dataToUpdate.rating = rating
-    }
+        return undefined
+    };
 
-    if (score !== undefined) {
-        if (score < 1 || score > 10) {
-            throw new ResponseError(400, 'Score must be between 1-10')
-        }
-        dataToUpdate.score = score
-    }
+    dataToUpdate.rating = validateRange(rating, 'Rating')
+    dataToUpdate.score = validateRange(score, 'Score')
+    
+    if (episodesWatched !== undefined) dataToUpdate.episodesWatched = episodesWatched
+    if (isFavorite !== undefined) dataToUpdate.isFavorite = isFavorite
+    if (notes !== undefined) dataToUpdate.notes = notes
 
-    if (episodesWatched !== undefined) {
-        dataToUpdate.episodesWatched = episodesWatched
-    }
-
-    if (isFavorite !== undefined) {
-        dataToUpdate.isFavorite = isFavorite
-    }
-
-    if (notes !== undefined) {
-        dataToUpdate.notes = notes
-    }
-
-    const newData = await animeListRepo.update(
-        { userId_animeId: { userId: userId, animeId: animeId } },
-        { ...dataToUpdate }
-    )
-
-    return newData
+    return await animeListRepo.update(
+        { 
+            userId_animeId: { userId, animeId } 
+        }, 
+        dataToUpdate
+    );
 }
 
 const removeAnime = async (userId, animeId) => {

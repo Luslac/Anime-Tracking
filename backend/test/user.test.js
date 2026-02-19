@@ -32,6 +32,7 @@ describe('POST /api/v1/registration', () => {
         expect(response.status).toBe(201)
         expect(response.body.success).toBe(true)
         expect(response.body.data.user.username).toBe("testing")
+        expect(response.body.data.user.name).toBe("Test User")
     })
 
     it("Reject double username", async () => {

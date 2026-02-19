@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import Loading from "../ui/Loading";
-import { useParams, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import { Link } from "react-router";
+
 
 export default function AnimeInfo() {
     const [anime, setAnime] = useState([])
     const [loading, setLoading] = useState(false) 
     const [error, setError] = useState(null) 
-
     const [searchQuery] = useSearchParams()
     const query = searchQuery.get("search")
-    console.log(`Query Hasil Adalah = ${query}`)
 
     useEffect(() => { 
         async function GetAnime() {
@@ -25,8 +24,12 @@ export default function AnimeInfo() {
                     throw new Error(`API Error: ${response.status}`)
                 }
                 
-                const data = await response.json()
-                setAnime(data.data)
+                const result = await response.json()
+                const data = result.data.filter(a => 
+                    !a.genres.some(genre => genre.name === "Hentai")
+                ) 
+                console.log(data)
+                setAnime(data)
                 
             } catch (err) {
                 console.error("Fetch error:", err)
@@ -39,8 +42,6 @@ export default function AnimeInfo() {
 
         GetAnime()
     }, [query])
-
-    
 
 
     if (loading) {

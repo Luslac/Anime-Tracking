@@ -34,7 +34,7 @@ const login = async (userReq) => {
     
     return {
         username: user.username,
-        name: user.username,
+        name: user.name,
         token: token
     }
 }

@@ -342,7 +342,7 @@ describe('Anime List API', () => {
                 })
 
             expect(response.status).toBe(400)
-            expect(response.body.errors).toContain('Rating must be between 1-10')
+            expect(response.body.errors).toContain('Rating must be between 0-10')
         })
 
         it('should reject rating above 10', async () => {
@@ -355,7 +355,7 @@ describe('Anime List API', () => {
                 })
 
             expect(response.status).toBe(400)
-            expect(response.body.errors).toContain('Rating must be between 1-10')
+            expect(response.body.errors).toContain('Rating must be between 0-10')
         })
 
         it('should reject score below 1', async () => {

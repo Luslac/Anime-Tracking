@@ -17,6 +17,8 @@ enum Status {
   WATCHING
   COMPLETED
   PLAN_TO_WATCH
+  ON_HOLD
+  DROPPED
 }
 model User {
   id Int @id @default(autoincrement())
