@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import Loading from "../ui/Loading"
-import AlertLogin from "../ui/Alert-Login"
 import AddAnimeAlert from "../ui/Alert-Add-Anime"
 import AlreadyInList from "../ui/Alert-AlreadyInList"
-
-// PENTING: Sesuaikan path ini dengan lokasi file api.js lu!
+import AlertLogin from "../ui/Alert-Login"
 import api from "../utils/api"
 
 export default function AnimeCard() {
