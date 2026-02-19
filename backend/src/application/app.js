@@ -8,7 +8,7 @@ export const web = express()
 
 const allowedOrigins = [
     'http://localhost:5173',           
-    'FRONT END kukukuk'      
+    process.env.FRONTEND_URL
 ]
 
 web.use(cors({
