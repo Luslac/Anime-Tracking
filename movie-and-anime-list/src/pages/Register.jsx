@@ -8,7 +8,7 @@ export default function Register() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-
+    const API_URL = import.meta.env.VITE_URL
     async function handleSubmit(e) {
         e.preventDefault()
         setError("")
@@ -21,7 +21,7 @@ export default function Register() {
         }
 
         try {
-            const response = await fetch("/api/v1/registration", {
+            const response = await fetch(`${API_URL}/api/v1/registration`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

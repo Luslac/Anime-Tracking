@@ -7,7 +7,7 @@ export default function Login() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-
+    const API_URL = import.meta.env.VITE_API_URL
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -15,7 +15,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const response = await fetch("/api/v1/login", {
+            const response = await fetch(`${API_URL}/api/v1/login`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
