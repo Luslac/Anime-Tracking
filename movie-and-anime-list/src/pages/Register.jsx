@@ -8,7 +8,7 @@ export default function Register() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    const API_URL = import.meta.env.VITE_URL
+    const API_URL = import.meta.env.VITE_API_URL
     async function handleSubmit(e) {
         e.preventDefault()
         setError("")
@@ -34,6 +34,7 @@ export default function Register() {
                 navigate("/login")
             } else {
                 setError(result.errors || "Registration failed")
+                
             }
         } catch (err) {
             setError("Something went wrong. Please try again.")
@@ -41,7 +42,7 @@ export default function Register() {
             setLoading(false)
         }
     }
-
+        console.log(error)
     return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-12">
             <div className="max-w-md w-full space-y-8">
