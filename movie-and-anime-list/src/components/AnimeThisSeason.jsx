@@ -52,6 +52,8 @@ export default function SeasonalAnime() {
         getAnime()
     }, [])
 
+
+    
     if (loading) return <div className="text-center py-10">Loading Seasonal Anime...</div>
 
     return (

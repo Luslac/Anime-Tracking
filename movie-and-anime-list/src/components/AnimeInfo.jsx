@@ -29,7 +29,7 @@ export default function AnimeInfo() {
                 const data = result.data.filter(a => 
                     !a.genres.some(genre => genre.name === "Hentai")
                 ) 
-                console.log(data)
+
                 setAnime(data)
                 
             } catch (err) {
