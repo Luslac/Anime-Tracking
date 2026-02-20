@@ -20,6 +20,7 @@ export default function MyList() {
 
     useEffect(() => {
         async function fetchList() {
+            
             const { token } = getAuthData()
             if (!token) {
                 setError("User session not found")
@@ -45,6 +46,7 @@ export default function MyList() {
         }
         fetchList()
     }, [])
+
 
     async function handleUpdate(updateData) {
         try {

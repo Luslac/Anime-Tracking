@@ -26,6 +26,11 @@ export default function AnimeCard() {
     }
 
     async function handleClick(status) {
+        const token = localStorage.getItem('token')
+        if (!token) {
+            setShowLogin(true)
+            return
+        }
         try {
             const response = await api.post('/api/v1/watchList', {
                 animeId: detailAnime.mal_id,
@@ -54,6 +59,7 @@ export default function AnimeCard() {
         <div className="text-white min-h-screen bg-gray-900">
             <div className="max-w-5xl mx-auto px-4 py-6">
                 {showLogin && <AlertLogin/>}
+
                 {alert === "add" ? (
                     <AddAnimeAlert onClose={() => setAlert("")} title={detailAnime.title} />
                 ) : alert === "inList" ? (
