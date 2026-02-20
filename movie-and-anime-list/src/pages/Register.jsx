@@ -77,6 +77,7 @@ export default function Register() {
                                 required
                                 className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition"
                             />
+                            <p className="mt-1 text-xs text-gray-500">As You Want</p>
                         </div>
 
                         <div>
@@ -92,6 +93,7 @@ export default function Register() {
                                 required
                                 className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition"
                             />
+                            <p className="mt-1 text-xs text-gray-500">Must be Unique</p>
                         </div>
 
                         <div>
