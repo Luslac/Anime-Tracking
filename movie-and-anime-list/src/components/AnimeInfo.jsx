@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Loading from "../ui/Loading";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { Link } from "react-router";
-
+import SearchInput from "../ui/SearchInput";
 
 export default function AnimeInfo() {
     const [anime, setAnime] = useState([])
@@ -10,6 +10,7 @@ export default function AnimeInfo() {
     const [error, setError] = useState(null) 
     const [searchQuery] = useSearchParams()
     const query = searchQuery.get("search")
+    const navigate = useNavigate()
 
     useEffect(() => { 
         async function GetAnime() {
@@ -70,37 +71,56 @@ export default function AnimeInfo() {
 
     return (
         <div className="p-4 bg-gray-900 min-h-screen text-white">
+
+            <div className="max-w-7xl mx-auto px-4 md:px-4 py-3 md:py-5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
+                    <button 
+                        onClick={() => navigate(-1)}
+                        className="px-3 py-2 md:px-4 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white rounded-lg active:scale-95 transition flex items-center justify-center gap-2 text-sm md:text-base"
+                    >
+                        ← Back
+                    </button>
+                    <SearchInput />
+                </div>
+            </div>
+
+
             <div className="max-w-4xl mx-auto">
                 {anime.map((item) => (
-                    <Link to={`/anime/detail/${item.mal_id}`}
+                    <Link 
+                        to={`/anime/detail/${item.mal_id}`}
                         key={`info-${item.mal_id}`} 
-                        className="bg-gray-800 rounded-lg p-4 mb-4 flex gap-4 cursor-pointer hover:bg-gray-700 transition"
-                        >
+                        className="bg-gray-800 rounded-lg p-3 md:p-4 mb-3 md:mb-4 flex flex-col sm:flex-row gap-3 md:gap-4 cursor-pointer hover:bg-gray-700 transition"
+                    >
 
-                        {/* Poster */}
                         <img 
                             src={item.images.jpg.image_url} 
                             alt={item.title}
-                            className="w-32 h-48 object-cover rounded"
+                            className="w-24 h-36 sm:w-32 sm:h-48 object-cover rounded mx-auto sm:mx-0 flex-shrink-0"
                         />
 
-                        {/* Detail */}
-                        <div className="flex-1">
-                            <h2 className="text-2xl font-bold mb-2">{item.title}</h2>
-                            
-                            <div className="flex gap-4 text-sm text-gray-400 mb-3">
-                                <span>⭐ {item.score}</span>
-                                <span>📺 {item.episodes || '?'} eps</span>
-                                <span className={item.airing ? "text-green-400" : "text-red-400"}>
-                                    {item.airing ? "🔴 Airing" : "✅ Finished"}
+                        <div className="flex-1 min-w-0">
+                            <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 line-clamp-2">{item.title}</h2>
+
+                            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400 mb-2 md:mb-3">
+                                <span className="flex items-center gap-1">
+                                    <span>⭐</span>
+                                    <span>{item.score}</span>
+                                </span>
+                                <span className="flex items-center gap-1">
+                                    <span>📺</span>
+                                    <span>{item.episodes || '?'} eps</span>
+                                </span>
+                                <span className={`flex items-center gap-1 ${item.airing ? "text-green-400" : "text-red-400"}`}>
+                                    <span>{item.airing ? "🔴" : "✅"}</span>
+                                    <span>{item.airing ? "Airing" : "Finished"}</span>
                                 </span>
                             </div>
-
-                            <p className="text-sm text-gray-300 line-clamp-4">
+                
+                            <p className="text-xs sm:text-sm text-gray-300 line-clamp-3 sm:line-clamp-4">
                                 {item.synopsis}
                             </p>
                         </div>
-
                     </Link>
                 ))}
             </div>

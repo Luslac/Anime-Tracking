@@ -1,13 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
 
-
 export default function SearchInput() {
     const [value, setValue] = useState("")
     const navigate = useNavigate()
-    function handleChange(e) {
-        setValue(e.target.value)
-    }
     
     function handleClick() {
         navigate({
@@ -16,12 +12,19 @@ export default function SearchInput() {
         })
     }
 
+    function handleKeyDown(e) {
+        if (e.key === "Enter") {
+            handleClick()
+        }
+    }
+
     return (
         <>
             <input 
                 type="text" 
                 value={value} 
-                onChange={handleChange}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="Search anime..."
                 className="flex-1 px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
             />

@@ -10,12 +10,12 @@ export default function Home() {
     
     return (
         <div className="bg-gray-900 min-h-screen text-white">
-            <div className=" top-16 z-40">
-                <div className="max-w-7xl mx-auto px-4 py-4">
-                    <div className="flex items-center gap-3">
+            <div className="top-16 z-40">
+                <div className="max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-4">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
                         <button 
                             onClick={() => navigate(-1)}
-                            className="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white rounded-lg active:scale-95 transition flex items-center gap-2"
+                            className="px-3 py-2 md:px-4 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white rounded-lg active:scale-95 transition flex items-center justify-center gap-2 text-sm md:text-base"
                         >
                             ← Back
                         </button>
@@ -46,7 +46,7 @@ export default function Home() {
                     </div>
                     <SeasonalAnime />
                 </section>
-                
+
                 <section>
                     <div className="flex items-center justify-between mb-6">
                         <div>

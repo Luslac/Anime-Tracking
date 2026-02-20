@@ -55,7 +55,7 @@ export default function SeasonalAnime() {
     if (loading) return <div className="text-center py-10">Loading Seasonal Anime...</div>
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {seasonalAnime?.map((anime) => (
                 <Link
                     key={`top-${anime.mal_id}`}

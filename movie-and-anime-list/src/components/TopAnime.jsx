@@ -56,7 +56,7 @@ export default function TopAnime() {
         
     }
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {topAnime.map((anime) => (
             <Link 
                 key={`top-${anime.mal_id}`}
