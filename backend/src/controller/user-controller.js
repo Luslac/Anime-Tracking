@@ -17,7 +17,7 @@ const registration = async (req, res, next) => {
         next(error)
     }
 }
-// Problem : NAME MALAH SAMA DENGAN USERNAME
+
 
 const login = async (req, res, next) => {
     try {
