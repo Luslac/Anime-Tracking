@@ -228,7 +228,7 @@ export default function AnimeCard() {
                             >
                                 {link.name}
                             </a>
-                        )}
+                        )} 
                     </div>
                 </div>
             </div>

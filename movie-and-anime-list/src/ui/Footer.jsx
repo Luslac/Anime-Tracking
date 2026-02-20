@@ -25,7 +25,7 @@ export default function Footer() {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/watchlist" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                                        <Link to="/watchList" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
                                             My List
                                         </Link>
                                     </li>
