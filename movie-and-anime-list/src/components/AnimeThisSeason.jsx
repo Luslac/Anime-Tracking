@@ -58,7 +58,7 @@ export default function SeasonalAnime() {
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {seasonalAnime?.map((anime) => (
                 <Link
-                    key={`top-${anime.mal_id}`}
+                    key={`season-${anime.mal_id}`}
                     className="bg-gray-800 p-2 rounded-lg hover:scale-105 transition group"
                     to={`/anime/detail/${anime.mal_id}`}
                 >

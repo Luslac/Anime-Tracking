@@ -9,6 +9,7 @@ import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import MyList from './components/MyList/MyList.jsx'
 import Home from './pages/Home.jsx'
+import Footer from './ui/Footer.jsx'
 
 
 
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/test' element={<Footer/>}/>
           <Route path='/' element={<App/>}>
             <Route index element={<Home/>}/>
             <Route path='/mylist' element={<MyList/>}/>

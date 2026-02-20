@@ -3,13 +3,14 @@ import SeasonalAnime from "../components/AnimeThisSeason";
 import TopAnime from "../components/TopAnime";
 import SearchInput from "../ui/SearchInput";
 import UpComingAnime from "../components/UpComing-Anime";
+import Footer from "../ui/Footer";
 
 
 export default function Home() {
     const navigate = useNavigate()
     
     return (
-        <div className="bg-gray-900 min-h-screen text-white">
+        <div className="bg-gray-900 min-h-screen flex flex-col text-white">
             <div className="top-16 z-40">
                 <div className="max-w-7xl mx-auto px-3 md:px-4 py-3 md:py-4">
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
@@ -26,8 +27,7 @@ export default function Home() {
                 </div>
             </div>
 
-
-            <div className="max-w-7xl mx-auto px-4 py-8 space-y-12">
+            <div className="max-w-7xl mx-auto px-4 py-8 space-y-12 flex-grow">
                 
                 <section>
                     <div className="flex items-center justify-between mb-6">
@@ -58,6 +58,8 @@ export default function Home() {
                     </div>
                     <UpComingAnime />
                 </section>
+
+                <Footer/>
             </div>
         </div>
     )

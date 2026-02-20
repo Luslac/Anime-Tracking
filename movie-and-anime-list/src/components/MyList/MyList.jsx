@@ -20,10 +20,10 @@ export default function MyList() {
 
     useEffect(() => {
         async function fetchList() {
-            
+
             const { token } = getAuthData()
             if (!token) {
-                setError("User session not found")
+                setError("User session not found, Login for this feature")
                 setLoading(false)
                 return
             }

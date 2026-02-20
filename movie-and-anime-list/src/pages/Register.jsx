@@ -49,7 +49,7 @@ export default function Register() {
                 
                 <div className="text-center">
                     <Link to="/" className="inline-block">
-                        <h1 className="text-4xl font-bold text-white mb-2">
+                        <h1 className="text-4xl font-bold text-white mb-2 hover:text-gray-400 transition-colors">
                             Wibu Discovery 
                         </h1>
                     </Link>

@@ -15,7 +15,7 @@ export default function Navbar({token}) {
     return (
     <nav className="border-b rounded-sm px-6 pb-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-white hover:text-blue-400 transition">
+            <Link to="/" className="text-2xl font-bold text-white hover:text-black-800 transition">
                 Wibu Discovery 
             </Link>
 
