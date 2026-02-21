@@ -73,7 +73,7 @@ export default function MyList() {
 
     async function handleDelete(animeId) {
         try {
-            const response = await api.delete('watchList', { data: {animeId: animeId} })
+            const response = await api.delete('/api/v1/watchList', { data: {animeId: animeId} })
 
             const result = response.data
             if (result.success) {
