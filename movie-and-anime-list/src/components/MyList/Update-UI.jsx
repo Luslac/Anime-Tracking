@@ -4,13 +4,12 @@ import { STATUS_CONFIG } from "./StatusBadge";
 export default function UpdateUI({ anime, onClose, onUpdate, onDelete }) {
     const [status, setStatus] = useState(anime.status)
     const [rating, setRating] = useState(anime.rating || 0)
-    const [score, setScore] = useState(anime.score || 0)
     const [episodesWatched, setEpisodesWatched] = useState(anime.episodesWatched || 0)
     const [notes, setNotes] = useState(anime.notes || "")
     const [isFavorite, setIsFavorite] = useState(anime.isFavorite || false)
 
     const handleSave = () => {
-        onUpdate({ status, rating, score, episodesWatched, notes, isFavorite })
+        onUpdate({ status, rating, episodesWatched, notes, isFavorite })
     }
 
     return (
